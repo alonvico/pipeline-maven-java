@@ -2,12 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the code from the repository
-                git branch: 'main', url: 'https://github.com/alonvico/pipeline-maven-java.git'
-            }
-        }
+
         stage('Build') {
             steps {
                 echo 'Building...'
@@ -18,7 +13,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                echo '${saludo}'
+                echo "${saludo}"
                 // Run tests using Maven
                 sh 'mvn test'
             }
@@ -34,7 +29,7 @@ pipeline {
             steps {
                 echo 'Deploying...'
                 // Run the Java program with an example argument
-                sh 'java -cp target/your-app-1.0-SNAPSHOT.jar com.apasoft.ToUpper "example test"'
+                sh 'java -cp target/your-app-1.0-SNAPSHOT.jar com.apasoft.ToUpper "${saludo}"'
             }
         }
     }
